@@ -537,25 +537,6 @@ func (d Daytime) Format(layout string, base time.Time) string {
 	return d.Time(base).Format(layout)
 }
 
-// MarshalText implements encoding.TextMarshaler.
-//
-// Encodes the daytime in HH:MM:SS format.
-func (d Daytime) MarshalText() ([]byte, error) {
-	return []byte(d.String()), nil
-}
-
-// UnmarshalText implements encoding.TextUnmarshaler.
-//
-// Supports the same formats as Parse.
-func (d *Daytime) UnmarshalText(text []byte) error {
-	daytime, err := Parse(string(text))
-	if err != nil {
-		return err
-	}
-	*d = daytime
-	return nil
-}
-
 // --- Helper functions ---
 
 // parseSeconds parses a string as integer seconds since midnight.
